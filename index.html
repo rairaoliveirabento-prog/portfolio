@@ -39,35 +39,13 @@
     overflow-x: hidden;
   }
 
-  /* ── NAV ─────────────────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 64px;
-    background: rgba(26,17,56,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(124,58,237,0.2);
-  }
-  .nav-logo {
-    font-size: 18px; font-weight: 700; color: var(--white);
-    letter-spacing: -0.3px;
-  }
-  .nav-logo span { color: var(--purple-light); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-size: 14px; color: var(--gray-400); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-
   /* ── HERO ────────────────────────────────────────────────────────── */
   .hero {
     min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
     flex-direction: column;
     text-align: center;
-    padding: 100px 5% 60px;
+    padding: 60px 5% 60px;
     position: relative;
     background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(97,31,105,0.5) 0%, transparent 70%),
                 radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,58,237,0.2) 0%, transparent 60%),
@@ -381,17 +359,7 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Raira<span>.</span></div>
-  <ul class="nav-links">
-    <li><a href="#sobre">Sobre mí</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experiencia">Experiencia</a></li>
-    <li><a href="#certificaciones">Certificaciones</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
+
 
 <!-- HERO -->
 <div class="hero">
@@ -815,6 +783,10 @@
 
 <footer>
   Diseñado y desarrollado para <span>Raira Bento</span> · Buenos Aires, 2025
+</footer>
+
+</body>
+</html>
 </footer>
 
 </body>
