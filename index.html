@@ -308,6 +308,28 @@
     flex-shrink: 0; margin-top: 8px;
   }
 
+  /* ── PROYECTOS ───────────────────────────────────────────────────── */
+  #proyectos { background: rgba(44,31,94,0.3); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+  }
+  .project-card {
+    background: rgba(26,17,56,0.8);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: rgba(167,139,250,0.5); transform: translateY(-3px); }
+  .project-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-sm);
+    background: rgba(124,58,237,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-size: 22px;
+  }
+  .project-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--white); }
+  .project-card p { font-size: 14px; color: var(--gray-200); line-height: 1.6; }
+
   /* ── CONTACTO ────────────────────────────────────────────────────── */
   #contacto {
     background: linear-gradient(135deg, rgba(97,31,105,0.4) 0%, rgba(44,31,94,0.6) 100%);
@@ -568,7 +590,10 @@
           <div class="timeline-bullet">Administración de Budgets, API Keys y licencias con análisis y documentación de gastos por plataforma</div>
           <div class="timeline-bullet">Automatización de accesos y recursos en GitHub, Azure y AWS (Python, Bash, PowerShell, Terraform, CloudFormation)</div>
           <div class="timeline-bullet">Administración de pipelines CI/CD, repositorios GitHub y creación de tableros con bancos de datos</div>
+          <div class="timeline-bullet">Desarrollo de dashboards ejecutivos en Power BI y Google Apps Script, integrando Microsoft Graph API, Azure Resource Manager, Azure Cost Management y Google Ads API</div>
+          <div class="timeline-bullet">Automatización de reportes de adopción y uso de Microsoft Copilot para análisis operativo</div>
           <div class="timeline-bullet">Control de stock de herramientas y equipamientos; participación en propuestas de mejora de infraestructura</div>
+          <div class="timeline-bullet">Colaboración directa con clientes y equipos internos en proyectos tecnológicos para organizaciones de aproximadamente 245 colaboradores</div>
         </div>
       </div>
 
@@ -606,6 +631,41 @@
           <div class="timeline-bullet">Monitoreo de performance (uptime, conversión, errores); reportes de incidentes y documentación de soluciones</div>
           <div class="timeline-bullet">Coordinación con equipos de desarrollo e infraestructura; onboarding técnico de nuevos clientes</div>
         </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS DESTACADOS -->
+<section id="proyectos">
+  <div class="container">
+    <div class="section-label">Highlights</div>
+    <div class="section-title">Proyectos destacados</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3>Implementación de Dashboard Cloud</h3>
+        <p>Diseño e implementación de tableros ejecutivos mediante Power BI, Google Apps Script e integración de APIs para centralizar información operativa y financiera.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🔄</div>
+        <h3>Automatización de Procesos IAM</h3>
+        <p>Automatización del ciclo de vida de usuarios (ABM), optimizando tiempos operativos y reduciendo tareas manuales.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🛡️</div>
+        <h3>Gobierno Cloud y FinOps</h3>
+        <p>Participación en auditorías internas, análisis de consumo Cloud, optimización de costos e implementación de políticas de acceso e identidad.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">☁️</div>
+        <h3>Migraciones Cloud</h3>
+        <p>Participación en proyectos de migración e implementación de servicios sobre Microsoft Azure y AWS.</p>
       </div>
 
     </div>
