@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raira Bento — IT Analyst Ssr</title>
+<title>Raira Bento — Technical Support Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Laktose:wght@700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,6 +38,29 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
+
+  /* ── LANG SWITCHER ───────────────────────────────────────────────── */
+  .lang-switcher {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 999;
+    display: flex;
+    background: rgba(26,17,56,0.9);
+    border: 1px solid rgba(124,58,237,0.35);
+    border-radius: 100px;
+    padding: 4px;
+    backdrop-filter: blur(6px);
+  }
+  .lang-btn {
+    border: none; background: transparent;
+    color: var(--gray-400);
+    font-size: 12px; font-weight: 700;
+    padding: 6px 14px; border-radius: 100px;
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .lang-btn.active { background: var(--purple-vivid); color: var(--white); }
+  @media (max-width: 640px){ .lang-switcher{ top: 12px; right: 12px; } }
 
   /* ── HERO ────────────────────────────────────────────────────────── */
   .hero {
@@ -113,28 +136,6 @@
   }
   .btn-outline:hover { border-color: var(--purple-light); color: var(--white); }
 
-  /* ── STATS BAR ───────────────────────────────────────────────────── */
-  .stats-bar {
-    display: flex; justify-content: center; gap: 0;
-    border-top: 1px solid rgba(124,58,237,0.2);
-    border-bottom: 1px solid rgba(124,58,237,0.2);
-    background: rgba(44,31,94,0.4);
-    margin-top: 60px; padding: 28px 5%;
-    flex-wrap: wrap;
-  }
-  .stat {
-    flex: 1; min-width: 140px;
-    text-align: center; padding: 12px 24px;
-    border-right: 1px solid rgba(124,58,237,0.2);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-size: 32px; font-weight: 700;
-    color: var(--purple-light);
-    letter-spacing: -1px;
-  }
-  .stat-label { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
-
   /* ── SECTIONS COMMON ─────────────────────────────────────────────── */
   section { padding: 80px 5%; }
   .section-label {
@@ -150,21 +151,14 @@
   .container { max-width: 1100px; margin: 0 auto; }
 
   /* ── SOBRE / ABOUT ───────────────────────────────────────────────── */
-  #sobre { background: var(--purple-deep); }
+  #sobre { background: var(--purple-deep); padding-top: 60px; }
   .about-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
   }
   .about-text p {
     font-size: 16px; color: var(--gray-200); line-height: 1.8; margin-bottom: 20px;
+    white-space: pre-line;
   }
-  .about-contact { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
-  .contact-item {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 14px; color: var(--gray-400);
-  }
-  .contact-item svg { flex-shrink: 0; }
-  .contact-item a { color: var(--purple-light); text-decoration: none; }
-  .contact-item a:hover { text-decoration: underline; }
   .about-card {
     background: rgba(44,31,94,0.5);
     border: 1px solid rgba(124,58,237,0.25);
@@ -196,16 +190,16 @@
   #certificaciones { background: rgba(44,31,94,0.25); }
   .cert-badges-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
   }
   .cert-badge-card {
     background: rgba(26,17,56,0.85);
     border: 1px solid rgba(124,58,237,0.22);
     border-radius: var(--radius-md);
-    padding: 24px 16px 20px;
+    padding: 16px 16px 20px;
     display: flex; flex-direction: column; align-items: center;
-    text-align: center; gap: 14px;
+    text-align: center; gap: 12px;
     transition: border-color 0.2s, transform 0.2s;
     cursor: default;
   }
@@ -213,27 +207,21 @@
     border-color: rgba(167,139,250,0.55);
     transform: translateY(-4px);
   }
-  .cert-badge-logo {
-    width: 80px; height: 80px;
-    display: flex; align-items: center; justify-content: center;
+  .cert-badge-img-wrap {
+    width: 100%; border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(124,58,237,0.25);
+    background: #f8f7ff;
   }
-  .cert-badge-logo svg, .cert-badge-logo img {
-    width: 80px; height: 80px; object-fit: contain;
+  .cert-badge-img-wrap img {
+    width: 100%; height: auto; display: block;
   }
   .cert-badge-name {
-    font-size: 12px; font-weight: 600; color: var(--white);
+    font-size: 13px; font-weight: 600; color: var(--white);
     line-height: 1.4;
   }
   .cert-badge-issuer {
     font-size: 11px; color: var(--gray-400);
-  }
-  .cert-badge-pill {
-    background: rgba(124,58,237,0.18);
-    border: 1px solid rgba(124,58,237,0.3);
-    color: var(--purple-light);
-    font-size: 10px; font-weight: 600;
-    padding: 3px 10px; border-radius: 100px;
-    letter-spacing: 0.5px; text-transform: uppercase;
   }
 
   /* ── SKILLS ──────────────────────────────────────────────────────── */
@@ -267,27 +255,26 @@
 
   /* ── EXPERIENCIA ─────────────────────────────────────────────────── */
   #experiencia { background: var(--purple-deep); }
-  .timeline { position: relative; padding-left: 28px; }
-  .timeline::before {
+  .timeline { display: flex; flex-direction: column; gap: 28px; }
+  .timeline-item {
+    background: rgba(44,31,94,0.45);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: relative;
+  }
+  .timeline-item::before {
     content: '';
-    position: absolute; left: 0; top: 8px; bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--purple-vivid) 0%, rgba(124,58,237,0.1) 100%);
-  }
-  .timeline-item { position: relative; margin-bottom: 48px; }
-  .timeline-dot {
-    position: absolute; left: -35px; top: 6px;
-    width: 14px; height: 14px; border-radius: 50%;
+    position: absolute; left: 0; top: 32px; bottom: 32px;
+    width: 4px; border-radius: 4px;
     background: var(--purple-vivid);
-    border: 2px solid var(--purple-deep);
-    box-shadow: 0 0 0 3px rgba(124,58,237,0.3);
   }
-  .timeline-header { margin-bottom: 16px; }
+  .timeline-header { margin-bottom: 18px; padding-left: 16px; }
   .timeline-role {
-    font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 4px;
+    font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 6px;
   }
   .timeline-company {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     font-size: 14px; color: var(--purple-light);
   }
   .timeline-period {
@@ -296,7 +283,11 @@
     border: 1px solid rgba(124,58,237,0.2);
     padding: 3px 10px; border-radius: 100px;
   }
-  .timeline-bullets { display: flex; flex-direction: column; gap: 8px; }
+  .timeline-location {
+    font-size: 12px; color: var(--gray-400);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .timeline-bullets { display: flex; flex-direction: column; gap: 8px; padding-left: 16px; }
   .timeline-bullet {
     display: flex; align-items: flex-start; gap: 10px;
     font-size: 14px; color: var(--gray-200); line-height: 1.6;
@@ -310,25 +301,14 @@
 
   /* ── PROYECTOS ───────────────────────────────────────────────────── */
   #proyectos { background: rgba(44,31,94,0.3); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
-  }
-  .project-card {
-    background: rgba(26,17,56,0.8);
-    border: 1px solid rgba(124,58,237,0.2);
+  .projects-placeholder {
+    text-align: center;
+    color: var(--gray-400);
+    font-size: 15px;
+    border: 1px dashed rgba(124,58,237,0.35);
     border-radius: var(--radius-md);
-    padding: 28px;
-    transition: border-color 0.2s, transform 0.2s;
+    padding: 48px 24px;
   }
-  .project-card:hover { border-color: rgba(167,139,250,0.5); transform: translateY(-3px); }
-  .project-icon {
-    width: 44px; height: 44px; border-radius: var(--radius-sm);
-    background: rgba(124,58,237,0.2);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 16px; font-size: 22px;
-  }
-  .project-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--white); }
-  .project-card p { font-size: 14px; color: var(--gray-200); line-height: 1.6; }
 
   /* ── CONTACTO ────────────────────────────────────────────────────── */
   #contacto {
@@ -369,9 +349,7 @@
   @media (max-width: 768px) {
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .nav-links { display: none; }
-    .stat { min-width: 120px; }
-    .timeline { padding-left: 20px; }
-    .timeline-dot { left: -27px; }
+    .timeline-item::before { top: 24px; bottom: 24px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -381,40 +359,33 @@
 </head>
 <body>
 
-
+<!-- LANG SWITCHER -->
+<div class="lang-switcher">
+  <button class="lang-btn active" id="btnEs" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+</div>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Raira Bento<br><span class="highlight">IT Analyst Ssr</span></h1>
-  <p class="hero-subtitle">Especialista en IAM, Cloud y FinOps con más de 5 años transformando infraestructuras IT en entornos multinacionales.</p>
+  <h1 data-i18n="hero-title"><span data-i18n-inline="raira">Raira Bento</span><br><span class="highlight" data-i18n="hero-role">Technical Support Engineer</span></h1>
+  <p class="hero-subtitle" data-i18n="hero-subtitle">Agente de Soporte Técnico con experiencia en Múltiples Entornos IT y Cloud.</p>
   <div class="hero-ctas">
-    <a href="#experiencia" class="btn-primary">
+    <a href="#experiencia" class="btn-primary" data-i18n="btn-experiencia">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-3-3v6M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/></svg>
       Ver experiencia
     </a>
-    <a href="#contacto" class="btn-outline">
+    <a href="#proyectos" class="btn-outline" data-i18n="btn-proyectos">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Proyectos
+    </a>
+    <a href="#certificaciones" class="btn-outline" data-i18n="btn-certificaciones">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg>
+      Certificaciones
+    </a>
+    <a href="#contacto" class="btn-outline" data-i18n="btn-contactar">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Contactar
     </a>
-  </div>
-
-  <div class="stats-bar">
-    <div class="stat">
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Años de experiencia</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Nubes gestionadas</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Certificaciones</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Idiomas</div>
-    </div>
   </div>
 </div>
 
@@ -429,51 +400,36 @@
                       border:3px solid rgba(124,58,237,0.6);
                       box-shadow: 0 0 0 5px rgba(124,58,237,0.12);">
           <div>
-            <div class="section-label" style="margin-bottom:4px;">Perfil</div>
-            <div style="font-size:22px; font-weight:700; color:var(--white); letter-spacing:-0.5px;">Sobre mí</div>
+            <div class="section-label" data-i18n="perfil-label">Perfil</div>
+            <div style="font-size:22px; font-weight:700; color:var(--white); letter-spacing:-0.5px;" data-i18n="sobre-mi-title">Sobre mí</div>
           </div>
         </div>
-        <p>Profesional de Tecnología con más de cinco años de experiencia en consultoría tecnológica,
-operaciones Cloud, administración de identidades (IAM) y automatización de procesos. Experiencia
-trabajando en proyectos de infraestructura sobre Microsoft Azure, AWS y Google Cloud Platform,
-participando en iniciativas de migración, gobierno de accesos, optimización de costos (FinOps) y mejora
-continua.
-Especializada en el desarrollo de soluciones mediante integración de APIs, Google Apps Script y Power
-BI para automatizar procesos, generar dashboards ejecutivos y optimizar la gestión operativa.
-Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios en entornos dinámicos.</p>
+        <p data-i18n="sobre-mi-text">Hola Soy Raira,
+
+Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo una trayectoria sólida en atención al cliente, asistencia técnica, solución de problemas en aplicaciones y microinformática para pymes y empresas globales. En los últimos 2 años me he especializado y perfeccionado mis conocimientos en entornos cloud, IA, ciberseguridad, IAM y proyectos de automatización de tareas repetitivas, además de profundizar en el uso de herramientas como Postman, Apps Script y n8n. Les detallo a continuación mi trayectoria profesional.</p>
       </div>
 
       <div class="about-card">
-        <h3>🌐 Idiomas</h3>
+        <h3 data-i18n="idiomas-title">🌐 Idiomas</h3>
         <div class="lang-item">
-          <div class="lang-label"><span>Portugués</span><span style="color:var(--purple-light)">Nativo</span></div>
+          <div class="lang-label"><span data-i18n="lang-pt">Portugués</span><span style="color:var(--purple-light)" data-i18n="lang-pt-level">Nativo</span></div>
           <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
         </div>
         <div class="lang-item">
-          <div class="lang-label"><span>Español</span><span style="color:var(--purple-light)">Bilingüe</span></div>
+          <div class="lang-label"><span data-i18n="lang-es">Español</span><span style="color:var(--purple-light)" data-i18n="lang-es-level">Bilingüe</span></div>
           <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
         </div>
         <div class="lang-item">
-          <div class="lang-label"><span>Inglés</span><span style="color:var(--purple-light)">B1</span></div>
+          <div class="lang-label"><span data-i18n="lang-en">Inglés</span><span style="color:var(--purple-light)">B1</span></div>
           <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
         </div>
 
-        <h3 style="margin-top:28px;">🎓 Formación</h3>
+        <h3 style="margin-top:28px;" data-i18n="formacion-title">🎓 Formación</h3>
         <div class="cert-list">
           <div class="cert-item">
             <div class="cert-dot" style="background:var(--purple-light)"></div>
-            Analista de Sistemas — UTN (2025 – actualidad)
+            <span data-i18n="formacion-item">Analista de Sistemas — UTN (2025 – actualidad)</span>
           </div>
-        </div>
-
-        <h3 style="margin-top:24px;">🏆 Certificaciones</h3>
-        <div class="cert-list">
-          <div class="cert-item"><div class="cert-dot"></div>AWS Certified Cloud Practitioner (CLF-C02)</div>
-          <div class="cert-item"><div class="cert-dot"></div>Microsoft Azure AZ-104</div>
-          <div class="cert-item"><div class="cert-dot"></div>Cisco IT Support Specialist</div>
-          <div class="cert-item"><div class="cert-dot"></div>Junior Cybersecurity Analyst — Cisco</div>
-          <div class="cert-item"><div class="cert-dot"></div>Microsoft Learn Azure</div>
-          <div class="cert-item"><div class="cert-dot"></div>Google Workspace Training</div>
         </div>
       </div>
     </div>
@@ -483,41 +439,42 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
-    <div class="section-label">Tecnologías</div>
-    <div class="section-title">Stack técnico</div>
+    <div class="section-label" data-i18n="tecnologias-label">Tecnologías</div>
+    <div class="section-title" data-i18n="stack-title">Stack técnico</div>
     <div class="skills-grid">
 
       <div class="skill-card">
         <div class="skill-icon">🔐</div>
-        <h3>IAM & Seguridad</h3>
+        <h3 data-i18n="skill-iam">IAM & Seguridad</h3>
         <div class="skill-tags">
           <span class="tag">Azure Entra ID</span>
           <span class="tag">AWS IAM</span>
           <span class="tag">Active Directory</span>
-          <span class="tag">RBAC</span>
           <span class="tag">MFA</span>
           <span class="tag">Intune</span>
           <span class="tag">SCCM</span>
           <span class="tag">ESET</span>
+          <span class="tag">Google Authenticator</span>
+          <span class="tag">Trend Micro Antivirus</span>
+          <span class="tag">OpenVPN</span>
+          <span class="tag">Palo Alto</span>
+          <span class="tag">Check Point</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">☁️</div>
-        <h3>Cloud</h3>
+        <h3 data-i18n="skill-cloud">Cloud</h3>
         <div class="skill-tags">
           <span class="tag">AWS</span>
           <span class="tag">Azure</span>
           <span class="tag">GCP</span>
-          <span class="tag">Google Workspace</span>
-          <span class="tag">OneDrive</span>
-          <span class="tag">Microsoft 365</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">💰</div>
-        <h3>FinOps & Billing</h3>
+        <h3 data-i18n="skill-finops">FinOps & Billing</h3>
         <div class="skill-tags">
           <span class="tag">Cloud Billing</span>
           <span class="tag">Budget Management</span>
@@ -529,7 +486,7 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 
       <div class="skill-card">
         <div class="skill-icon">⚙️</div>
-        <h3>Automatización</h3>
+        <h3 data-i18n="skill-automatizacion">Automatización</h3>
         <div class="skill-tags">
           <span class="tag">Python</span>
           <span class="tag">Bash</span>
@@ -538,33 +495,45 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
           <span class="tag">CloudFormation</span>
           <span class="tag">GitHub</span>
           <span class="tag">Apps Script</span>
+          <span class="tag">n8n</span>
+          <span class="tag">Postman</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">🎫</div>
-        <h3>ITSM & Herramientas</h3>
+        <h3 data-i18n="skill-crm">Herramientas CRM</h3>
         <div class="skill-tags">
           <span class="tag">Jira</span>
+          <span class="tag">InvGate</span>
           <span class="tag">ServiceNow</span>
-          <span class="tag">Postman</span>
+          <span class="tag">Salesforce</span>
+          <span class="tag">Zendesk</span>
           <span class="tag">SAP GUI</span>
-          <span class="tag">TestRail</span>
           <span class="tag">Finnegans</span>
-          <span class="tag">Copilot</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">🖥️</div>
-        <h3>Sistemas Operativos</h3>
+        <h3 data-i18n="skill-so">Sistemas Operativos</h3>
         <div class="skill-tags">
           <span class="tag">Windows Admin</span>
           <span class="tag">Linux</span>
           <span class="tag">macOS</span>
           <span class="tag">iOS</span>
           <span class="tag">Google Sites</span>
-          <span class="tag">Claude Admin</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3 data-i18n="skill-ia">Inteligencia Artificial</h3>
+        <div class="skill-tags">
+          <span class="tag">OpenAI</span>
+          <span class="tag">Claude</span>
+          <span class="tag">Gemini</span>
+          <span class="tag">Copilot</span>
         </div>
       </div>
 
@@ -575,67 +544,104 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 <!-- EXPERIENCIA -->
 <section id="experiencia">
   <div class="container">
-    <div class="section-label">Trayectoria</div>
-    <div class="section-title">Experiencia profesional</div>
+    <div class="section-label" data-i18n="trayectoria-label">Trayectoria</div>
+    <div class="section-title" data-i18n="experiencia-title">Experiencia profesional</div>
     <div class="timeline">
 
       <div class="timeline-item">
-        <div class="timeline-dot"></div>
         <div class="timeline-header">
-          <div class="timeline-role">IT Analyst Ssr</div>
+          <div class="timeline-role" data-i18n="job1-role">IT Support Ssr</div>
           <div class="timeline-company">
-            NUBIRAL S.A
-            <span class="timeline-period">Sep 2025 – Actualidad</span>
+            Nubiral S.A
+            <span class="timeline-period" data-i18n="job1-period">Septiembre de 2025 a actualidad</span>
+            <span class="timeline-location">📍 Buenos Aires, Argentina</span>
           </div>
         </div>
-        <div class="timeline-bullets">
-          <div class="timeline-bullet">Administración de IAM y ABM de usuarios en AWS, Azure y Google Workspace bajo el principio de mínimo privilegio</div>
-          <div class="timeline-bullet">Auditoría periódica de usuarios, roles y permisos IAM; documentación de controles y procedimientos de seguridad</div>
-          <div class="timeline-bullet">Monitoreo multi-cloud (AWS, Azure): recursos, redes virtuales, subnets y grupos de seguridad</div>
-          <div class="timeline-bullet">Control FinOps: reportes de consumo, optimización de costos (rightsizing, reserved instances, savings plans) y KPIs financieros</div>
-          <div class="timeline-bullet">Administración de Budgets, API Keys y licencias con análisis y documentación de gastos por plataforma</div>
-          <div class="timeline-bullet">Automatización de accesos y recursos en GitHub, Azure y AWS (Python, Bash, PowerShell, Terraform, CloudFormation)</div>
-          <div class="timeline-bullet">Administración de pipelines CI/CD, repositorios GitHub y creación de tableros con bancos de datos</div>
-          <div class="timeline-bullet">Desarrollo de dashboards ejecutivos en Power BI y Google Apps Script, integrando Microsoft Graph API, Azure Resource Manager, Azure Cost Management y Google Ads API</div>
-          <div class="timeline-bullet">Automatización de reportes de adopción y uso de Microsoft Copilot para análisis operativo</div>
-          <div class="timeline-bullet">Control de stock de herramientas y equipamientos; participación en propuestas de mejora de infraestructura</div>
-          <div class="timeline-bullet">Colaboración directa con clientes y equipos internos en proyectos tecnológicos para organizaciones de aproximadamente 245 colaboradores</div>
+        <div class="timeline-bullets" data-i18n-group="job1-bullets">
+          <div class="timeline-bullet">Gestión de ABM de usuarios (altas/bajas) y asignación de accesos.</div>
+          <div class="timeline-bullet">Soporte N2 - N3 a usuarios internos y VIP de la compañía.</div>
+          <div class="timeline-bullet">Asegurar cumplimiento de SLA, plazos y troubleshooting de procesos en ticketera Jira.</div>
+          <div class="timeline-bullet">Creación y asignación de proyectos en GCP y AWS vía Control Tower.</div>
+          <div class="timeline-bullet">Cloud soporte a nivel IAM en Google Workspace, Microsoft Azure y AWS.</div>
+          <div class="timeline-bullet">Responsable de crear y monitorear budgets de control de uso a nivel enterprise.</div>
+          <div class="timeline-bullet">Participación activa en la creación y gestión de políticas de ciberseguridad en las plataformas de la compañía.</div>
+          <div class="timeline-bullet">Implementación activa con ESET, OpenVPN y Palo Alto.</div>
+          <div class="timeline-bullet">Análisis de FinOps en gastos de licenciamiento y servicios en GitHub, Copilot, Claude y Office 365.</div>
+          <div class="timeline-bullet">Mantenimiento de instancias y máquinas virtuales en ambientes EC2, Entra ID y paneles de alertas Zabbix.</div>
+          <div class="timeline-bullet">Creación de flujo de trabajo en Slack con integración Jira.</div>
+          <div class="timeline-bullet">Migración de bases de datos SQL a instancias virtuales.</div>
+          <div class="timeline-bullet">Análisis de código JSON para software en migración y automatización.</div>
+          <div class="timeline-bullet">Procurement para la implementación de nuevos equipos informáticos.</div>
+          <div class="timeline-bullet">Automatización de sistemas, guardias pasivas y tableros para Capacity Management vía Postman, Apps Script y Google Sites.</div>
+          <div class="timeline-bullet">Desarrollo de dashboards ejecutivos en Power BI, Microsoft Graph API, Azure Resource Manager y Azure Cost Management.</div>
+          <div class="timeline-bullet">Mantenimiento microinformático de equipos desktop, notebooks e infraestructura como servidores con sistemas operativos Windows Server, Windows 11 y Linux Ubuntu.</div>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot"></div>
         <div class="timeline-header">
-          <div class="timeline-role">Onsite IT Ssr</div>
+          <div class="timeline-role" data-i18n="job2-role">Soporte Onsite Ssr</div>
           <div class="timeline-company">
-            HUNEI IT
-            <span class="timeline-period">Ene 2023 – Sep 2025</span>
+            Huenei S.A
+            <span class="timeline-period" data-i18n="job2-period">Enero 2023 – Septiembre 2025</span>
+            <span class="timeline-location">📍 Buenos Aires, Argentina</span>
           </div>
         </div>
-        <div class="timeline-bullets">
-          <div class="timeline-bullet">Soporte presencial N2-N3 en equipos Windows, macOS y Linux; diagnóstico y reparación de hardware y periféricos</div>
-          <div class="timeline-bullet">Gestión del ciclo de vida de equipos: onboarding, alta/baja/reasignación e inventario de hardware y software</div>
-          <div class="timeline-bullet">Soporte LAN/WiFi, VPN, impresoras, teléfonos IP, videoconferencia y cableado estructurado</div>
-          <div class="timeline-bullet">Gestión de usuarios en Active Directory / Azure AD; administración de licencias SaaS (M365, Google Workspace, Slack, Zoom)</div>
-          <div class="timeline-bullet">Configuración de MFA, políticas de seguridad en endpoints y aplicación de parches de actualización</div>
-          <div class="timeline-bullet">Participación en auditorías internas de activos tecnológicos; elaboración de runbooks y procedimientos técnicos</div>
+        <div class="timeline-bullets" data-i18n-group="job2-bullets">
+          <div class="timeline-bullet">Soporte onsite N2-N3 para un importante cliente, atendiendo a usuarios internos, proveedores y VIP de toda la compañía.</div>
+          <div class="timeline-bullet">Asegurar el cumplimiento de SLA de tickets entrantes y salientes en InvGate, Jira y ServiceNow.</div>
+          <div class="timeline-bullet">Control de usuarios y accesos mediante Active Directory.</div>
+          <div class="timeline-bullet">Responsable principal de crear Software Packaging vía SCCM, así como de masterizar y reacondicionar equipos informáticos con sistemas Windows Server, Windows 11 y Linux.</div>
+          <div class="timeline-bullet">Configuración y diagnóstico de interfaces, VLAN, rutas, bonding y MTU.</div>
+          <div class="timeline-bullet">Realización de mapeos de unidades de red y respaldos en OneDrive.</div>
+          <div class="timeline-bullet">Asignación y monitoreo de máquinas virtuales mediante los paneles VMware Horizon y Oracle VirtualBox.</div>
+          <div class="timeline-bullet">Asistencia remota vía SCCM, Remote Desktop y soporte de aplicaciones para software SCADA.</div>
+          <div class="timeline-bullet">Soporte microinformático a equipos de videoconferencia, desktops, notebooks y equipos de infraestructura como teléfonos y radios de comunicación.</div>
+          <div class="timeline-bullet">Documentación de asignaciones de activos fijos vía SAP HANA, control de stock y envío de equipamiento al interior de Argentina.</div>
+          <div class="timeline-bullet">Responsable de la instalación e implementación de software vía Software Center, Trend Micro Antivirus y VPN Check Point.</div>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-dot" style="background:var(--gray-600);box-shadow:none;"></div>
         <div class="timeline-header">
-          <div class="timeline-role">IT E-Commerce Support Jr</div>
+          <div class="timeline-role" data-i18n="job3-role">E-Commerce Support Jr</div>
           <div class="timeline-company">
-            VALTECH DIGITAL S.A
-            <span class="timeline-period">Fev 2022 – Dez 2022</span>
+            Valtech Digital S.A
+            <span class="timeline-period" data-i18n="job3-period">Febrero 2022 – Diciembre 2022</span>
+            <span class="timeline-location">📍 Buenos Aires, Argentina</span>
           </div>
         </div>
-        <div class="timeline-bullets">
-          <div class="timeline-bullet">Soporte técnico N1 en plataformas e-commerce (Shopify, WooCommerce, VTEX); diagnóstico y resolución de incidentes</div>
-          <div class="timeline-bullet">Gestión de integraciones con sistemas externos (ERP, CRM, pasarelas de pago, logística) y administración de usuarios</div>
-          <div class="timeline-bullet">Monitoreo de performance (uptime, conversión, errores); reportes de incidentes y documentación de soluciones</div>
-          <div class="timeline-bullet">Coordinación con equipos de desarrollo e infraestructura; onboarding técnico de nuevos clientes</div>
+        <div class="timeline-bullets" data-i18n-group="job3-bullets">
+          <div class="timeline-bullet">Soporte N2 a proyectos y aplicaciones en desarrollo.</div>
+          <div class="timeline-bullet">Asistencia directa a Account Managers y documentación de estrategias de mejora.</div>
+          <div class="timeline-bullet">Cumplimiento de SLA y control de calidad de tareas operativas cargadas vía Jira.</div>
+          <div class="timeline-bullet">Seguimiento y prevención de errores reportados en productos junto al área de Developers.</div>
+          <div class="timeline-bullet">Análisis de logs en backend y bases de datos SQL.</div>
+          <div class="timeline-bullet">Coordinación con equipos de QA y Developers para la implementación de mejoras y el seguimiento semanal de métricas.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <div class="timeline-role" data-i18n="job4-role">Technical Help Desk y Analista de Control QA</div>
+          <div class="timeline-company">
+            Cognizant
+            <span class="timeline-period" data-i18n="job4-period">Mayo de 2020 a febrero de 2022</span>
+            <span class="timeline-location">📍 Buenos Aires, Argentina</span>
+          </div>
+        </div>
+        <div class="timeline-bullets" data-i18n-group="job4-bullets">
+          <div class="timeline-bullet">Soporte técnico N1 a usuarios internos para múltiples clientes.</div>
+          <div class="timeline-bullet">Cumplimiento de métricas de SLA y solución rápida de tickets vía Software Center.</div>
+          <div class="timeline-bullet">Restablecimiento de contraseñas y gestión de accesos vía Active Directory.</div>
+          <div class="timeline-bullet">Asistencia remota vía telefónica, correo electrónico, Microsoft Teams, LogMeIn y TeamViewer.</div>
+          <div class="timeline-bullet">Solución de incidencias con cuentas y aplicaciones de Microsoft 365 (Outlook, Excel, SharePoint).</div>
+          <div class="timeline-bullet">Atención en mesa de ayuda para incidencias de microinformática y derivación de casos a soporte local.</div>
+          <div class="timeline-bullet">Coordinación de colas de tickets (Ticket Queue Coordinator) en ServiceNow.</div>
+          <div class="timeline-bullet">Derivación de tareas de servicio a distintos equipos técnicos en EE. UU.</div>
+          <div class="timeline-bullet">Control de calidad (QA) de documentación y llamadas.</div>
+          <div class="timeline-bullet">Auditoría de servicios para el control de calidad y la satisfacción del cliente.</div>
+          <div class="timeline-bullet">Documentación y retroalimentación continua (feedback) para el equipo de Account Management.</div>
         </div>
       </div>
 
@@ -646,167 +652,57 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 <!-- PROYECTOS DESTACADOS -->
 <section id="proyectos">
   <div class="container">
-    <div class="section-label">Highlights</div>
-    <div class="section-title">Proyectos destacados</div>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-icon">📊</div>
-        <h3>Implementación de Dashboard Cloud</h3>
-        <p>Diseño e implementación de tableros ejecutivos mediante Power BI, Google Apps Script e integración de APIs para centralizar información operativa y financiera.</p>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">🔄</div>
-        <h3>Automatización de Procesos IAM</h3>
-        <p>Automatización del ciclo de vida de usuarios (ABM), optimizando tiempos operativos y reduciendo tareas manuales.</p>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">🛡️</div>
-        <h3>Gobierno Cloud y FinOps</h3>
-        <p>Participación en auditorías internas, análisis de consumo Cloud, optimización de costos e implementación de políticas de acceso e identidad.</p>
-      </div>
-
-      <div class="project-card">
-        <div class="project-icon">☁️</div>
-        <h3>Migraciones Cloud</h3>
-        <p>Participación en proyectos de migración e implementación de servicios sobre Microsoft Azure y AWS.</p>
-      </div>
-
-    </div>
+    <div class="section-label" data-i18n="highlights-label">Highlights</div>
+    <div class="section-title" data-i18n="proyectos-title">Proyectos destacados</div>
+    <div class="projects-placeholder" data-i18n="proyectos-placeholder">Próximamente — proyectos destacados con imágenes en preparación.</div>
   </div>
 </section>
 
 <!-- CERTIFICACIONES -->
 <section id="certificaciones">
   <div class="container">
-    <div class="section-label">Credenciales</div>
-    <div class="section-title">Certificaciones</div>
+    <div class="section-label" data-i18n="credenciales-label">Credenciales</div>
+    <div class="section-title" data-i18n="certificaciones-title">Certificaciones</div>
     <div class="cert-badges-grid">
 
-      <!-- AWS Cloud Practitioner -->
       <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#232F3E"/>
-            <circle cx="40" cy="40" r="38" fill="url(#awsgrad)" fill-opacity="0.15"/>
-            <defs>
-              <radialGradient id="awsgrad" cx="50%" cy="30%" r="60%">
-                <stop offset="0%" stop-color="#FF9900"/>
-                <stop offset="100%" stop-color="#232F3E"/>
-              </radialGradient>
-            </defs>
-            <!-- AWS smile arrow -->
-            <path d="M24 42 Q40 52 56 42" stroke="#FF9900" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M53 39 L56 42 L53 45" stroke="#FF9900" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <!-- AWS text -->
-            <text x="40" y="35" text-anchor="middle" fill="#FF9900" font-size="11" font-weight="700" font-family="Arial,sans-serif">AWS</text>
-            <text x="40" y="62" text-anchor="middle" fill="#FF9900" font-size="6.5" font-family="Arial,sans-serif" font-weight="600">CERTIFIED</text>
-            <!-- Cloud icon -->
-            <path d="M30 26 Q30 20 36 20 Q38 15 44 16 Q49 14 50 20 Q55 20 55 26 Q55 31 50 31 L32 31 Q27 31 30 26Z" fill="#FF9900" opacity="0.9"/>
-          </svg>
+        <div class="cert-badge-img-wrap">
+          <img src="certs/gcp-1.png" alt="Google Cloud Associate Cloud Engineer">
         </div>
-        <div class="cert-badge-name">AWS Certified Cloud Practitioner</div>
-        <div class="cert-badge-issuer">Amazon Web Services</div>
-        <div class="cert-badge-pill">CLF-C02</div>
+        <div class="cert-badge-name">Google Cloud Associate Cloud Engineer</div>
+        <div class="cert-badge-issuer">Google Cloud</div>
       </div>
 
-      <!-- Azure AZ-104 -->
       <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#0078D4" fill-opacity="0.15"/>
-            <circle cx="40" cy="40" r="38" stroke="#0078D4" stroke-width="1.5" fill="#0a1628"/>
-            <!-- Azure A logo -->
-            <polygon points="20,55 40,20 60,55" fill="none" stroke="#0078D4" stroke-width="2.5" stroke-linejoin="round"/>
-            <line x1="27" y1="45" x2="53" y2="45" stroke="#0078D4" stroke-width="2.5"/>
-            <!-- Gradient overlay -->
-            <path d="M40 20 L55 45 Q60 55 53 55 L27 55 Q20 55 25 45 Z" fill="#0078D4" fill-opacity="0.2"/>
-            <text x="40" y="68" text-anchor="middle" fill="#0078D4" font-size="7" font-weight="700" font-family="Arial,sans-serif">MICROSOFT AZURE</text>
-          </svg>
+        <div class="cert-badge-img-wrap">
+          <img src="certs/cyber-1.png" alt="Introduction to Cybersecurity">
         </div>
-        <div class="cert-badge-name">Microsoft Azure Administrator</div>
-        <div class="cert-badge-issuer">Microsoft</div>
-        <div class="cert-badge-pill">AZ-104</div>
+        <div class="cert-badge-name">Introduction to Cybersecurity</div>
+        <div class="cert-badge-issuer">Cisco Networking Academy</div>
       </div>
 
-      <!-- Cisco IT Support Specialist -->
       <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#049FD9" fill-opacity="0.12"/>
-            <circle cx="40" cy="40" r="38" stroke="#049FD9" stroke-width="1.5" fill="#0a1628"/>
-            <!-- Cisco bridge bars -->
-            <rect x="37" y="16" width="6" height="10" rx="3" fill="#049FD9"/>
-            <rect x="27" y="20" width="6" height="8" rx="3" fill="#049FD9"/>
-            <rect x="47" y="20" width="6" height="8" rx="3" fill="#049FD9"/>
-            <rect x="17" y="26" width="6" height="6" rx="3" fill="#049FD9"/>
-            <rect x="57" y="26" width="6" height="6" rx="3" fill="#049FD9"/>
-            <!-- Line connecting -->
-            <line x1="20" y1="40" x2="60" y2="40" stroke="#049FD9" stroke-width="1.5" stroke-dasharray="4,3"/>
-            <text x="40" y="52" text-anchor="middle" fill="#049FD9" font-size="8" font-weight="700" font-family="Arial,sans-serif">CISCO</text>
-            <text x="40" y="62" text-anchor="middle" fill="#a0c8e0" font-size="6" font-family="Arial,sans-serif">IT SUPPORT</text>
-            <text x="40" y="70" text-anchor="middle" fill="#a0c8e0" font-size="6" font-family="Arial,sans-serif">SPECIALIST</text>
-          </svg>
+        <div class="cert-badge-img-wrap">
+          <img src="certs/azure_deploy.jpg" alt="Deploying Your First Resources in Azure">
         </div>
-        <div class="cert-badge-name">IT Support Specialist</div>
-        <div class="cert-badge-issuer">Cisco</div>
-        <div class="cert-badge-pill">Cisco Certified</div>
+        <div class="cert-badge-name">Deploying Your First Resources in Azure</div>
+        <div class="cert-badge-issuer">Udemy</div>
       </div>
 
-      <!-- Cisco Junior Cybersecurity -->
       <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#049FD9" fill-opacity="0.12"/>
-            <circle cx="40" cy="40" r="38" stroke="#049FD9" stroke-width="1.5" fill="#0a1628"/>
-            <!-- Shield -->
-            <path d="M40 16 L56 23 L56 40 Q56 54 40 62 Q24 54 24 40 L24 23 Z" fill="#049FD9" fill-opacity="0.2" stroke="#049FD9" stroke-width="2"/>
-            <!-- Lock -->
-            <rect x="34" y="38" width="12" height="10" rx="2" fill="#049FD9"/>
-            <path d="M36 38 L36 34 Q36 29 40 29 Q44 29 44 34 L44 38" stroke="#049FD9" stroke-width="2" fill="none"/>
-            <circle cx="40" cy="43" r="2" fill="#0a1628"/>
-            <text x="40" y="72" text-anchor="middle" fill="#049FD9" font-size="5.5" font-weight="700" font-family="Arial,sans-serif">CYBERSECURITY</text>
-          </svg>
+        <div class="cert-badge-img-wrap">
+          <img src="certs/linux_shell.jpg" alt="Linux Shell Course for Beginners">
         </div>
-        <div class="cert-badge-name">Junior Cybersecurity Analyst</div>
-        <div class="cert-badge-issuer">Cisco</div>
-        <div class="cert-badge-pill">Cisco Certified</div>
+        <div class="cert-badge-name">Linux Shell Course for Beginners – Lite</div>
+        <div class="cert-badge-issuer">Udemy</div>
       </div>
 
-      <!-- Microsoft Learn Azure -->
       <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#0078D4" fill-opacity="0.1"/>
-            <circle cx="40" cy="40" r="38" stroke="#0078D4" stroke-width="1.5" fill="#0a1628"/>
-            <!-- Microsoft squares -->
-            <rect x="22" y="22" width="16" height="16" rx="2" fill="#F25022"/>
-            <rect x="42" y="22" width="16" height="16" rx="2" fill="#7FBA00"/>
-            <rect x="22" y="42" width="16" height="16" rx="2" fill="#00A4EF"/>
-            <rect x="42" y="42" width="16" height="16" rx="2" fill="#FFB900"/>
-            <text x="40" y="72" text-anchor="middle" fill="#0078D4" font-size="6" font-weight="700" font-family="Arial,sans-serif">MICROSOFT LEARN</text>
-          </svg>
+        <div class="cert-badge-img-wrap">
+          <img src="certs/analytics.jpg" alt="Analítica Web con Google Analytics">
         </div>
-        <div class="cert-badge-name">Microsoft Learn Azure</div>
-        <div class="cert-badge-issuer">Microsoft</div>
-        <div class="cert-badge-pill">Learning Path</div>
-      </div>
-
-      <!-- Google Workspace -->
-      <div class="cert-badge-card">
-        <div class="cert-badge-logo">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="40" cy="40" r="38" fill="#4285F4" fill-opacity="0.1"/>
-            <circle cx="40" cy="40" r="38" stroke="#4285F4" stroke-width="1.5" fill="#0a1628"/>
-            <!-- Google G -->
-            <path d="M54 40 L54 40 Q54 50 47 55 Q41 59 35 57 Q26 54 24 45 Q22 36 27 29 Q33 22 42 23 Q48 24 51 29 L47 33 Q44 28 39 28 Q32 28 29 34 Q26 40 29 46 Q32 52 39 52 Q45 52 47 47 L40 47 L40 40 Z" fill="#4285F4"/>
-          </svg>
-        </div>
-        <div class="cert-badge-name">Google Workspace Training</div>
-        <div class="cert-badge-issuer">Google</div>
-        <div class="cert-badge-pill">Certified</div>
+        <div class="cert-badge-name">Analítica Web con Google Analytics</div>
+        <div class="cert-badge-issuer">Udemy</div>
       </div>
 
     </div>
@@ -816,9 +712,9 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="container">
-    <div class="section-label">¿Hablamos?</div>
-    <div class="section-title">Contacto</div>
-    <p>Abierta a nuevas oportunidades en roles de IT, Cloud e infraestructura. No dudes en escribirme.</p>
+    <div class="section-label" data-i18n="hablamos-label">¿Hablamos?</div>
+    <div class="section-title" data-i18n="contacto-title">Contacto</div>
+    <p data-i18n="contacto-text">Abierta a nuevas oportunidades en roles de IT, Cloud e infraestructura. No dudes en escribirme.</p>
     <div class="contact-grid">
       <a href="mailto:rairaoliveirabento@gmail.com" class="contact-card">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -833,7 +729,7 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
         linkedin.com/in/rairabento
       </a>
     </div>
-    <a href="https://rairaoliveirabento-prog.github.io/portf%C3%B3lio/Raira_Bento_CV_ATS_2p.pdf" download="Raira_Bento_CV.pdf" target="_blank" class="btn-primary" style="display:inline-flex; margin-top:8px;">
+    <a href="https://rairaoliveirabento-prog.github.io/portf%C3%B3lio/Raira_Bento_CV_ATS_2p.pdf" download="Raira_Bento_CV.pdf" target="_blank" class="btn-primary" style="display:inline-flex; margin-top:8px;" data-i18n="btn-cv">
       <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Descargar CV
     </a>
@@ -841,8 +737,201 @@ Acostumbrada a trabajar con clientes corporativos y equipos multidisciplinarios 
 </section>
 
 <footer>
-  Diseñado y desarrollado para <span>Raira Bento</span> · Buenos Aires, 2025
+  <span data-i18n="footer-text">Diseñado y desarrollado para</span> <span>Raira Bento</span> · Buenos Aires, 2025
 </footer>
+
+<script>
+  const i18n = {
+    "hero-role": { es: "Technical Support Engineer", en: "Technical Support Engineer" },
+    "hero-subtitle": { es: "Agente de Soporte Técnico con experiencia en Múltiples Entornos IT y Cloud.", en: "Technical Support Agent with experience across multiple IT and Cloud environments." },
+    "btn-experiencia": { es: "Ver experiencia", en: "View experience" },
+    "btn-proyectos": { es: "Proyectos", en: "Projects" },
+    "btn-certificaciones": { es: "Certificaciones", en: "Certifications" },
+    "btn-contactar": { es: "Contactar", en: "Contact" },
+    "perfil-label": { es: "Perfil", en: "Profile" },
+    "sobre-mi-title": { es: "Sobre mí", en: "About me" },
+    "sobre-mi-text": {
+      es: "Hola Soy Raira,\n\nTrabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo una trayectoria sólida en atención al cliente, asistencia técnica, solución de problemas en aplicaciones y microinformática para pymes y empresas globales. En los últimos 2 años me he especializado y perfeccionado mis conocimientos en entornos cloud, IA, ciberseguridad, IAM y proyectos de automatización de tareas repetitivas, además de profundizar en el uso de herramientas como Postman, Apps Script y n8n. Les detallo a continuación mi trayectoria profesional.",
+      en: "Hi, I'm Raira,\n\nI have worked in IT technical support for more than 5 years. I have a solid background in customer service, technical assistance, and troubleshooting applications and end-user computing for SMEs and global companies. Over the last 2 years I've specialized in cloud environments, AI, cybersecurity, IAM, and task-automation projects, while deepening my knowledge of tools such as Postman, Apps Script, and n8n. Below is my professional background."
+    },
+    "idiomas-title": { es: "🌐 Idiomas", en: "🌐 Languages" },
+    "lang-pt": { es: "Portugués", en: "Portuguese" },
+    "lang-pt-level": { es: "Nativo", en: "Native" },
+    "lang-es": { es: "Español", en: "Spanish" },
+    "lang-es-level": { es: "Bilingüe", en: "Bilingual" },
+    "lang-en": { es: "Inglés", en: "English" },
+    "formacion-title": { es: "🎓 Formación", en: "🎓 Education" },
+    "formacion-item": { es: "Analista de Sistemas — UTN (2025 – actualidad)", en: "Systems Analyst — UTN (2025 – present)" },
+    "tecnologias-label": { es: "Tecnologías", en: "Technologies" },
+    "stack-title": { es: "Stack técnico", en: "Technical stack" },
+    "skill-iam": { es: "IAM & Seguridad", en: "IAM & Security" },
+    "skill-cloud": { es: "Cloud", en: "Cloud" },
+    "skill-finops": { es: "FinOps & Billing", en: "FinOps & Billing" },
+    "skill-automatizacion": { es: "Automatización", en: "Automation" },
+    "skill-crm": { es: "Herramientas CRM", en: "CRM Tools" },
+    "skill-so": { es: "Sistemas Operativos", en: "Operating Systems" },
+    "skill-ia": { es: "Inteligencia Artificial", en: "Artificial Intelligence" },
+    "trayectoria-label": { es: "Trayectoria", en: "Career" },
+    "experiencia-title": { es: "Experiencia profesional", en: "Professional experience" },
+    "job1-role": { es: "IT Support Ssr", en: "IT Support Sr." },
+    "job1-period": { es: "Septiembre de 2025 a actualidad", en: "September 2025 – present" },
+    "job2-role": { es: "Soporte Onsite Ssr", en: "Onsite Support Sr." },
+    "job2-period": { es: "Enero 2023 – Septiembre 2025", en: "January 2023 – September 2025" },
+    "job3-role": { es: "E-Commerce Support Jr", en: "E-Commerce Support Jr." },
+    "job3-period": { es: "Febrero 2022 – Diciembre 2022", en: "February 2022 – December 2022" },
+    "job4-role": { es: "Technical Help Desk y Analista de Control QA", en: "Technical Help Desk & QA Control Analyst" },
+    "job4-period": { es: "Mayo de 2020 a febrero de 2022", en: "May 2020 – February 2022" },
+    "highlights-label": { es: "Highlights", en: "Highlights" },
+    "proyectos-title": { es: "Proyectos destacados", en: "Featured projects" },
+    "proyectos-placeholder": { es: "Próximamente — proyectos destacados con imágenes en preparación.", en: "Coming soon — featured projects with images are being prepared." },
+    "credenciales-label": { es: "Credenciales", en: "Credentials" },
+    "certificaciones-title": { es: "Certificaciones", en: "Certifications" },
+    "hablamos-label": { es: "¿Hablamos?", en: "Let's talk?" },
+    "contacto-title": { es: "Contacto", en: "Contact" },
+    "contacto-text": { es: "Abierta a nuevas oportunidades en roles de IT, Cloud e infraestructura. No dudes en escribirme.", en: "Open to new opportunities in IT, Cloud, and infrastructure roles. Feel free to reach out." },
+    "btn-cv": { es: "Descargar CV", en: "Download CV" },
+    "footer-text": { es: "Diseñado y desarrollado para", en: "Designed and developed for" }
+  };
+
+  const job1Bullets = {
+    es: [
+      "Gestión de ABM de usuarios (altas/bajas) y asignación de accesos.",
+      "Soporte N2 - N3 a usuarios internos y VIP de la compañía.",
+      "Asegurar cumplimiento de SLA, plazos y troubleshooting de procesos en ticketera Jira.",
+      "Creación y asignación de proyectos en GCP y AWS vía Control Tower.",
+      "Cloud soporte a nivel IAM en Google Workspace, Microsoft Azure y AWS.",
+      "Responsable de crear y monitorear budgets de control de uso a nivel enterprise.",
+      "Participación activa en la creación y gestión de políticas de ciberseguridad en las plataformas de la compañía.",
+      "Implementación activa con ESET, OpenVPN y Palo Alto.",
+      "Análisis de FinOps en gastos de licenciamiento y servicios en GitHub, Copilot, Claude y Office 365.",
+      "Mantenimiento de instancias y máquinas virtuales en ambientes EC2, Entra ID y paneles de alertas Zabbix.",
+      "Creación de flujo de trabajo en Slack con integración Jira.",
+      "Migración de bases de datos SQL a instancias virtuales.",
+      "Análisis de código JSON para software en migración y automatización.",
+      "Procurement para la implementación de nuevos equipos informáticos.",
+      "Automatización de sistemas, guardias pasivas y tableros para Capacity Management vía Postman, Apps Script y Google Sites.",
+      "Desarrollo de dashboards ejecutivos en Power BI, Microsoft Graph API, Azure Resource Manager y Azure Cost Management.",
+      "Mantenimiento microinformático de equipos desktop, notebooks e infraestructura como servidores con sistemas operativos Windows Server, Windows 11 y Linux Ubuntu."
+    ],
+    en: [
+      "Managed user lifecycle (onboarding/offboarding) and access assignment.",
+      "Provided N2–N3 support to internal and VIP company users.",
+      "Ensured SLA and deadline compliance, and troubleshooting of processes via Jira.",
+      "Created and assigned projects in GCP and AWS via Control Tower.",
+      "Provided IAM-level cloud support across Google Workspace, Microsoft Azure and AWS.",
+      "Responsible for creating and monitoring enterprise-level usage budgets.",
+      "Actively participated in creating and managing cybersecurity policies across company platforms.",
+      "Active implementation with ESET, OpenVPN and Palo Alto.",
+      "FinOps analysis of licensing and service costs across GitHub, Copilot, Claude and Office 365.",
+      "Maintained instances and virtual machines in EC2, Entra ID environments, and Zabbix alert dashboards.",
+      "Built Slack workflows integrated with Jira.",
+      "Migrated SQL databases to virtual instances.",
+      "Analyzed JSON code for software migration and automation.",
+      "Handled procurement for new IT equipment implementation.",
+      "Automated systems, on-call schedules and Capacity Management boards via Postman, Apps Script and Google Sites.",
+      "Developed executive dashboards in Power BI, Microsoft Graph API, Azure Resource Manager and Azure Cost Management.",
+      "Provided end-user hardware maintenance for desktops, notebooks and server infrastructure running Windows Server, Windows 11 and Linux Ubuntu."
+    ]
+  };
+
+  const job2Bullets = {
+    es: [
+      "Soporte onsite N2-N3 para un importante cliente, atendiendo a usuarios internos, proveedores y VIP de toda la compañía.",
+      "Asegurar el cumplimiento de SLA de tickets entrantes y salientes en InvGate, Jira y ServiceNow.",
+      "Control de usuarios y accesos mediante Active Directory.",
+      "Responsable principal de crear Software Packaging vía SCCM, así como de masterizar y reacondicionar equipos informáticos con sistemas Windows Server, Windows 11 y Linux.",
+      "Configuración y diagnóstico de interfaces, VLAN, rutas, bonding y MTU.",
+      "Realización de mapeos de unidades de red y respaldos en OneDrive.",
+      "Asignación y monitoreo de máquinas virtuales mediante los paneles VMware Horizon y Oracle VirtualBox.",
+      "Asistencia remota vía SCCM, Remote Desktop y soporte de aplicaciones para software SCADA.",
+      "Soporte microinformático a equipos de videoconferencia, desktops, notebooks y equipos de infraestructura como teléfonos y radios de comunicación.",
+      "Documentación de asignaciones de activos fijos vía SAP HANA, control de stock y envío de equipamiento al interior de Argentina.",
+      "Responsable de la instalación e implementación de software vía Software Center, Trend Micro Antivirus y VPN Check Point."
+    ],
+    en: [
+      "Provided onsite N2–N3 support for a major client, assisting internal users, vendors and VIPs across the company.",
+      "Ensured SLA compliance for incoming and outgoing tickets in InvGate, Jira and ServiceNow.",
+      "Managed users and access via Active Directory.",
+      "Main owner of Software Packaging via SCCM, and imaging/refurbishing of computers running Windows Server, Windows 11 and Linux.",
+      "Configured and diagnosed interfaces, VLANs, routes, bonding and MTU.",
+      "Mapped network drives and managed backups on OneDrive.",
+      "Assigned and monitored virtual machines via VMware Horizon and Oracle VirtualBox dashboards.",
+      "Provided remote assistance via SCCM, Remote Desktop, and application support for SCADA software.",
+      "Provided end-user hardware support for video conferencing equipment, desktops, notebooks and infrastructure devices such as phones and radios.",
+      "Documented fixed-asset assignments via SAP HANA, managed stock control and equipment shipping across Argentina.",
+      "Responsible for software installation and deployment via Software Center, Trend Micro Antivirus and Check Point VPN."
+    ]
+  };
+
+  const job3Bullets = {
+    es: [
+      "Soporte N2 a proyectos y aplicaciones en desarrollo.",
+      "Asistencia directa a Account Managers y documentación de estrategias de mejora.",
+      "Cumplimiento de SLA y control de calidad de tareas operativas cargadas vía Jira.",
+      "Seguimiento y prevención de errores reportados en productos junto al área de Developers.",
+      "Análisis de logs en backend y bases de datos SQL.",
+      "Coordinación con equipos de QA y Developers para la implementación de mejoras y el seguimiento semanal de métricas."
+    ],
+    en: [
+      "Provided N2 support for projects and applications in development.",
+      "Provided direct assistance to Account Managers and documented improvement strategies.",
+      "Ensured SLA compliance and quality control of operational tasks logged via Jira.",
+      "Tracked and helped prevent reported product errors alongside the Developers team.",
+      "Analyzed backend logs and SQL databases.",
+      "Coordinated with QA and Developer teams to implement improvements and track weekly metrics."
+    ]
+  };
+
+  const job4Bullets = {
+    es: [
+      "Soporte técnico N1 a usuarios internos para múltiples clientes.",
+      "Cumplimiento de métricas de SLA y solución rápida de tickets vía Software Center.",
+      "Restablecimiento de contraseñas y gestión de accesos vía Active Directory.",
+      "Asistencia remota vía telefónica, correo electrónico, Microsoft Teams, LogMeIn y TeamViewer.",
+      "Solución de incidencias con cuentas y aplicaciones de Microsoft 365 (Outlook, Excel, SharePoint).",
+      "Atención en mesa de ayuda para incidencias de microinformática y derivación de casos a soporte local.",
+      "Coordinación de colas de tickets (Ticket Queue Coordinator) en ServiceNow.",
+      "Derivación de tareas de servicio a distintos equipos técnicos en EE. UU.",
+      "Control de calidad (QA) de documentación y llamadas.",
+      "Auditoría de servicios para el control de calidad y la satisfacción del cliente.",
+      "Documentación y retroalimentación continua (feedback) para el equipo de Account Management."
+    ],
+    en: [
+      "Provided N1 technical support to internal users for multiple clients.",
+      "Met SLA metrics and quickly resolved tickets via Software Center.",
+      "Reset passwords and managed access via Active Directory.",
+      "Provided remote assistance via phone, email, Microsoft Teams, LogMeIn and TeamViewer.",
+      "Resolved incidents with Microsoft 365 accounts and applications (Outlook, Excel, SharePoint).",
+      "Handled help-desk inquiries for end-user computing issues and escalated cases to local support.",
+      "Coordinated ticket queues (Ticket Queue Coordinator) in ServiceNow.",
+      "Escalated service tasks to different technical teams in the US.",
+      "Performed quality control (QA) of documentation and calls.",
+      "Audited services for quality control and customer satisfaction.",
+      "Documented and provided continuous feedback for the Account Management team."
+    ]
+  };
+
+  const bulletGroups = { "job1-bullets": job1Bullets, "job2-bullets": job2Bullets, "job3-bullets": job3Bullets, "job4-bullets": job4Bullets };
+
+  function setLang(lang) {
+    document.getElementById('htmlRoot').lang = lang;
+    document.getElementById('btnEs').classList.toggle('active', lang === 'es');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[key]) el.textContent = i18n[key][lang];
+    });
+
+    document.querySelectorAll('[data-i18n-group]').forEach(group => {
+      const key = group.getAttribute('data-i18n-group');
+      const data = bulletGroups[key];
+      if (!data) return;
+      const bullets = group.querySelectorAll('.timeline-bullet');
+      bullets.forEach((b, i) => { if (data[lang][i]) b.textContent = data[lang][i]; });
+    });
+  }
+</script>
 
 </body>
 </html>
