@@ -223,6 +223,23 @@
   .cert-badge-issuer {
     font-size: 11px; color: var(--gray-400);
   }
+  .cert-badge-pdf-link {
+    width: 100%; aspect-ratio: 4/3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px;
+    background: rgba(124,58,237,0.1);
+    border: 1px dashed rgba(124,58,237,0.4);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--purple-light);
+    font-size: 13px; font-weight: 600;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .cert-badge-pdf-link:hover {
+    background: rgba(124,58,237,0.2);
+    border-color: var(--purple-light);
+  }
+  .cert-badge-pdf-icon { font-size: 34px; }
 
   /* ── SKILLS ──────────────────────────────────────────────────────── */
   #skills { background: rgba(44,31,94,0.3); }
@@ -666,24 +683,26 @@ Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo 
     <div class="cert-badges-grid">
 
       <div class="cert-badge-card">
-        <div class="cert-badge-img-wrap">
-          <img src="certs/gcp-1.png" alt="Google Cloud Associate Cloud Engineer">
-        </div>
+        <a href="Google Cloud Associate Engineer (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge-pdf-link">
+          <div class="cert-badge-pdf-icon">📄</div>
+          <span>Ver certificado (PDF)</span>
+        </a>
         <div class="cert-badge-name">Google Cloud Associate Cloud Engineer</div>
         <div class="cert-badge-issuer">Google Cloud</div>
       </div>
 
       <div class="cert-badge-card">
-        <div class="cert-badge-img-wrap">
-          <img src="certs/cyber-1.png" alt="Introduction to Cybersecurity">
-        </div>
+        <a href="Introduction_to_Cybersecurity_certificate_rairaoliveirabento-gmail-com_0c5951c1-111e-478f-9875-33c4eb65cc88 (1).pdf" target="_blank" rel="noopener noreferrer" class="cert-badge-pdf-link">
+          <div class="cert-badge-pdf-icon">📄</div>
+          <span>Ver certificado (PDF)</span>
+        </a>
         <div class="cert-badge-name">Introduction to Cybersecurity</div>
         <div class="cert-badge-issuer">Cisco Networking Academy</div>
       </div>
 
       <div class="cert-badge-card">
         <div class="cert-badge-img-wrap">
-          <img src="certs/azure_deploy.jpg" alt="Deploying Your First Resources in Azure">
+          <img src="Deploying your first resources in azure (1).jpg" alt="Deploying Your First Resources in Azure">
         </div>
         <div class="cert-badge-name">Deploying Your First Resources in Azure</div>
         <div class="cert-badge-issuer">Udemy</div>
@@ -691,7 +710,7 @@ Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo 
 
       <div class="cert-badge-card">
         <div class="cert-badge-img-wrap">
-          <img src="certs/linux_shell.jpg" alt="Linux Shell Course for Beginners">
+          <img src="Linux shell Course for beginners -lite (1).jpg" alt="Linux Shell Course for Beginners">
         </div>
         <div class="cert-badge-name">Linux Shell Course for Beginners – Lite</div>
         <div class="cert-badge-issuer">Udemy</div>
@@ -699,7 +718,7 @@ Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo 
 
       <div class="cert-badge-card">
         <div class="cert-badge-img-wrap">
-          <img src="certs/analytics.jpg" alt="Analítica Web con Google Analytics">
+          <img src="Analitica web con Google analytics (1).jpg" alt="Analítica Web con Google Analytics">
         </div>
         <div class="cert-badge-name">Analítica Web con Google Analytics</div>
         <div class="cert-badge-issuer">Udemy</div>
