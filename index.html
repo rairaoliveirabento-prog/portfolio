@@ -270,6 +270,48 @@
     padding: 4px 10px; border-radius: 100px;
   }
 
+  /* ── TOOLKIT MARQUEE ─────────────────────────────────────────────── */
+  #toolkit { background: var(--purple-deep); padding-top: 60px; padding-bottom: 60px; }
+  .toolkit-marquee-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 24px 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  }
+  .toolkit-track {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: max-content;
+    animation: toolkit-scroll 45s linear infinite;
+  }
+  .toolkit-marquee-wrap:hover .toolkit-track { animation-play-state: paused; }
+  .toolkit-item {
+    flex: 0 0 auto;
+    width: 96px; height: 96px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(124,58,237,0.15);
+    transition: transform 0.2s;
+  }
+  .toolkit-item:hover { transform: translateY(-4px) scale(1.05); }
+  .toolkit-item img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+  }
+  @keyframes toolkit-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toolkit-track { animation: none; }
+  }
+
   /* ── EXPERIENCIA ─────────────────────────────────────────────────── */
   #experiencia { background: var(--purple-deep); }
   .timeline { display: flex; flex-direction: column; gap: 28px; }
@@ -367,6 +409,7 @@
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .nav-links { display: none; }
     .timeline-item::before { top: 24px; bottom: 24px; }
+    .toolkit-item { width: 76px; height: 76px; padding: 12px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -554,6 +597,94 @@ Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo 
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT MARQUEE -->
+<section id="toolkit">
+  <div class="container">
+    <div class="section-label" data-i18n="toolkit-label">Toolkit</div>
+    <div class="section-title" data-i18n="toolkit-title">Herramientas que uso</div>
+  </div>
+  <div class="toolkit-marquee-wrap">
+    <div class="toolkit-track" id="toolkitTrack">
+      <!-- Set A -->
+      <div class="toolkit-item"><img src="logos/aws.png" alt="AWS"></div>
+      <div class="toolkit-item"><img src="logos/aws-ec2.png" alt="Amazon EC2"></div>
+      <div class="toolkit-item"><img src="logos/azure.png" alt="Microsoft Azure"></div>
+      <div class="toolkit-item"><img src="logos/google-cloud.png" alt="Google Cloud"></div>
+      <div class="toolkit-item"><img src="logos/google-workspace.png" alt="Google Workspace"></div>
+      <div class="toolkit-item"><img src="logos/google-sites.png" alt="Google Sites"></div>
+      <div class="toolkit-item"><img src="logos/onedrive.png" alt="OneDrive"></div>
+      <div class="toolkit-item"><img src="logos/powerbi.png" alt="Power BI"></div>
+      <div class="toolkit-item"><img src="logos/copilot.jpeg" alt="Microsoft Copilot"></div>
+      <div class="toolkit-item"><img src="logos/openai.jpeg" alt="OpenAI"></div>
+      <div class="toolkit-item"><img src="logos/gemini.webp" alt="Google Gemini"></div>
+      <div class="toolkit-item"><img src="logos/manus-ai.jpg" alt="Manus AI"></div>
+      <div class="toolkit-item"><img src="logos/n8n.png" alt="n8n"></div>
+      <div class="toolkit-item"><img src="logos/jira.png" alt="Jira"></div>
+      <div class="toolkit-item"><img src="logos/servicenow.png" alt="ServiceNow"></div>
+      <div class="toolkit-item"><img src="logos/salesforce.png" alt="Salesforce"></div>
+      <div class="toolkit-item"><img src="logos/slack.png" alt="Slack"></div>
+      <div class="toolkit-item"><img src="logos/github.png" alt="GitHub"></div>
+      <div class="toolkit-item"><img src="logos/vmware.png" alt="VMware"></div>
+      <div class="toolkit-item"><img src="logos/docker.jpeg" alt="Docker"></div>
+      <div class="toolkit-item"><img src="logos/windows.jpg" alt="Windows"></div>
+      <div class="toolkit-item"><img src="logos/ubuntu-linux.jpeg" alt="Ubuntu / Linux"></div>
+      <div class="toolkit-item"><img src="logos/linux-tux.jpg" alt="Linux"></div>
+      <div class="toolkit-item"><img src="logos/ios.png" alt="iOS"></div>
+      <div class="toolkit-item"><img src="logos/eset.jpeg" alt="ESET"></div>
+      <div class="toolkit-item"><img src="logos/trendmicro.webp" alt="Trend Micro"></div>
+      <div class="toolkit-item"><img src="logos/checkpoint.jpeg" alt="Check Point"></div>
+      <div class="toolkit-item"><img src="logos/paloalto.jpeg" alt="Palo Alto Networks"></div>
+      <div class="toolkit-item"><img src="logos/openvpn.png" alt="OpenVPN"></div>
+      <div class="toolkit-item"><img src="logos/zabbix.png" alt="Zabbix"></div>
+      <div class="toolkit-item"><img src="logos/freepbx.png" alt="FreePBX"></div>
+      <div class="toolkit-item"><img src="logos/crosschex.png" alt="CrossChex"></div>
+      <div class="toolkit-item"><img src="logos/poly.png" alt="Poly"></div>
+      <div class="toolkit-item"><img src="logos/webex.png" alt="Cisco Webex"></div>
+      <div class="toolkit-item"><img src="logos/kiro.jpeg" alt="Kiro"></div>
+      <div class="toolkit-item"><img src="logos/bord.png" alt="Bord"></div>
+      <div class="toolkit-item"><img src="logos/microsoft-graph.png" alt="Microsoft Graph"></div>
+      <!-- Set B (duplicate for seamless loop) -->
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/aws.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/aws-ec2.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/azure.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/google-cloud.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/google-workspace.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/google-sites.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/onedrive.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/powerbi.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/copilot.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/openai.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/gemini.webp" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/manus-ai.jpg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/n8n.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/jira.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/servicenow.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/salesforce.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/slack.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/github.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/vmware.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/docker.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/windows.jpg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/ubuntu-linux.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/linux-tux.jpg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/ios.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/eset.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/trendmicro.webp" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/checkpoint.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/paloalto.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/openvpn.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/zabbix.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/freepbx.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/crosschex.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/poly.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/webex.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/kiro.jpeg" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/bord.png" alt=""></div>
+      <div class="toolkit-item" aria-hidden="true"><img src="logos/microsoft-graph.png" alt=""></div>
     </div>
   </div>
 </section>
@@ -790,6 +921,8 @@ Trabajo en el área de IT en soporte técnico desde hace más de 5 años. Tengo 
     "skill-crm": { es: "Herramientas CRM", en: "CRM Tools" },
     "skill-so": { es: "Sistemas Operativos", en: "Operating Systems" },
     "skill-ia": { es: "Inteligencia Artificial", en: "Artificial Intelligence" },
+    "toolkit-label": { es: "Toolkit", en: "Toolkit" },
+    "toolkit-title": { es: "Herramientas que uso", en: "Tools I use" },
     "trayectoria-label": { es: "Trayectoria", en: "Career" },
     "experiencia-title": { es: "Experiencia profesional", en: "Professional experience" },
     "job1-role": { es: "IT Support Ssr", en: "IT Support Sr." },
